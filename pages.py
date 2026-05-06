@@ -8,6 +8,11 @@ class UrbanRoutesPage:
     from_field = (By.ID,"from")
     to_field = (By.ID,"to")
 
+    # Selecionar tarifa e chamar taxi
+    taxi_option_locator = (By.XPATH, '//button[contains(text(),"Chamar")]')
+    comfort_icon_locator = (By.XPATH, '//img[@src="/static/media/kids.075fd8d4.svg"]')
+    comfort_active = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[2]/div[1]/div[5]')
+
 
     def __init__(self, driver):
         self.driver = driver
@@ -46,3 +51,17 @@ class UrbanRoutesPage:
 
     def get_to_location(self):
         return self._get_value(self.to_field)
+
+    def click_taxi(self):
+        self.driver.find_element(*self.taxi_option_locator).click()
+
+    def click_comfort(self):
+        self.driver.find_element(*self.comfort_icon_locator).click()
+
+    def click_comfort_active(self):
+        try:
+            active_button = WebDriverWait(self.driver, 10).until(
+                EC.visibility_of_element_located(self.comfort_active))
+            return "active" in active_button.get_attribute("class")
+        except:
+            return False

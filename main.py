@@ -25,6 +25,7 @@ class TestUrbanRoutes:
     def setup_method(self):
         self.driver.get(data.URBAN_ROUTES_URL)
         self.page = UrbanRoutesPage(self.driver)
+        self.page.enter_location(data.ADDRESS_FROM,data.ADDRESS_TO)
 
     def test_set_route(self):
         self.page.enter_location(data.ADDRESS_FROM,data.ADDRESS_TO)
@@ -33,9 +34,10 @@ class TestUrbanRoutes:
         time.sleep(10)
 
     def test_select_plan(self):
-        # Adicionar em S8
-        print("função criada para selecionar plano")
-        pass
+        self.page.click_taxi()
+        self.page.click_comfort()
+        assert self.page.click_comfort_active()
+        time.sleep(10)
 
     def test_fill_phone_number(self):
         # Adicionar em S8
