@@ -49,9 +49,11 @@ class TestUrbanRoutes:
 
 
     def test_fill_card(self):
-        # Adicionar em S8
-        print("função criada para preencher cartao")
-        pass
+        self.page.click_taxi()
+        self.page.click_comfort()
+        self.page.click_add_card(data.CARD_NUMBER, data.CARD_CODE)
+        assert "Cartão" in self.page.card_confirm()
+        time.sleep(10)
 
     def test_comment_for_driver(self):
         # Adicionar em S8

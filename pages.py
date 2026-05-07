@@ -1,7 +1,9 @@
+from selenium.webdriver.common import driver_finder
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-
+import time
+from selenium.webdriver.common.by import By
 from helpers import retrieve_phone_code
 
 
@@ -22,6 +24,14 @@ class UrbanRoutesPage:
     number_code = (By.ID, 'code')
     code_confirm = (By.XPATH, '//button[contains(text(),"Confirmar")]')
     number_finish = (By.CSS_SELECTOR, '.np-text')
+    # METODO DE PAGAMENTO
+    add_metodo_pagamento = (By.CSS_SELECTOR, '.pp-button.filled')
+    add_card = (By.CSS_SELECTOR, '.pp-plus')
+    number_card = (By.ID, 'number')
+    code_card = (By.CSS_SELECTOR, 'input.card-input#code')
+    add_finish_card = (By.XPATH, '//button[contains(text(),"Adicionar")]')
+    close_button_card = (By.CSS_SELECTOR, '.payment-picker.open .close-button')
+    confirm_card = (By.CSS_SELECTOR, '.pp-value-text')
 
     def __init__(self, driver):
         self.driver = driver
@@ -93,3 +103,18 @@ class UrbanRoutesPage:
             EC.visibility_of_element_located(self.number_finish)
         )
         return number_confirm.text
+
+    def click_add_card(self, card,code):
+        self.driver.find_element(*self.add_metodo_pagamento).click()
+        self.driver.find_element(*self.add_card).click()
+        time.sleep(1)
+        self.driver.find_element(*self.number_card).send_keys(card)
+        time.sleep(1)
+        self.driver.find_element(*self.code_card).send_keys(code)
+        time.sleep(1)
+        self.driver.find_element(*self.add_finish_card).click()
+        self.driver.find_element(*self.close_button_card).click()
+
+    def card_confirm(self):
+       return self.driver.find_element(*self.confirm_card).text
+
