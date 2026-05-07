@@ -40,9 +40,13 @@ class TestUrbanRoutes:
         time.sleep(10)
 
     def test_fill_phone_number(self):
-        # Adicionar em S8
-        print("função criada para preencher numero de telefone")
-        pass
+        self.page.click_taxi()
+        self.page.click_comfort()
+        self.page.click_number(data.PHONE_NUMBER)
+        assert data.PHONE_NUMBER in self.page.click_number_confirm()
+        time.sleep(10)
+
+
 
     def test_fill_card(self):
         # Adicionar em S8
@@ -55,7 +59,7 @@ class TestUrbanRoutes:
         pass
 
     def test_order_blanket_and_handkerchiefs(self):
-        # Adicionar em S8
+        #         # Adicionar em S8
         print("função criada para pedir manta e lencos")
         pass
 

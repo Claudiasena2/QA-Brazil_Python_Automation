@@ -2,6 +2,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
+from helpers import retrieve_phone_code
+
+
 class UrbanRoutesPage:
 
     # Localizadores
@@ -12,7 +15,13 @@ class UrbanRoutesPage:
     taxi_option_locator = (By.XPATH, '//button[contains(text(),"Chamar")]')
     comfort_icon_locator = (By.XPATH, '//img[@src="/static/media/kids.075fd8d4.svg"]')
     comfort_active = (By.XPATH, '//*[@id="root"]/div/div[3]/div[3]/div[2]/div[1]/div[5]')
-
+    # Numero de Telefone
+    number_text_locator = (By.CSS_SELECTOR, '.np-button')
+    number_enter = (By.ID, 'phone')
+    number_confirm = (By.CSS_SELECTOR, '.button.full')
+    number_code = (By.ID, 'code')
+    code_confirm = (By.XPATH, '//button[contains(text(),"Confirmar")]')
+    number_finish = (By.CSS_SELECTOR, '.np-text')
 
     def __init__(self, driver):
         self.driver = driver
@@ -65,3 +74,22 @@ class UrbanRoutesPage:
             return "active" in active_button.get_attribute("class")
         except:
             return False
+
+    def click_number(self, phone):
+        self.driver.find_element(*self.number_text_locator).click()
+        self.driver.find_element(*self.number_enter).send_keys(phone)
+        self.driver.find_element(*self.number_confirm).click()
+
+        code = retrieve_phone_code(self.driver)
+        code_impult = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(self.number_code)
+        )
+        code_impult.clear()
+        code_impult.send_keys(code)
+        self.driver.find_element(*self.code_confirm).click()
+
+    def click_number_confirm(self):
+        number_confirm = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(self.number_finish)
+        )
+        return number_confirm.text
