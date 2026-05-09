@@ -36,6 +36,9 @@ class UrbanRoutesPage:
     # Comentário para o motorista
     comment_field = (By.ID, "comment")
     message_for_driver_field = (By.ID, "comment")
+    # Para clicar no seletor de cobertor e lenços
+    def click_blanket_and_handkerchiefs(self):
+        self.driver.find_element(By.XPATH, "//div[@class='r-sw-container']//div[@class='switch']").click()
 
     def __init__(self, driver):
         self.driver = driver
@@ -46,7 +49,7 @@ class UrbanRoutesPage:
     def select_comfort_tariff(self):
         comfort_icon = self.driver.find_element(*self.comfort_icon_locator)
         comfort_icon.click()
-        
+
     def get_message_field_value(self):
         return self.driver.find_element(*self.message_for_driver_field).get_attribute("value")
 
@@ -54,6 +57,10 @@ class UrbanRoutesPage:
         comment_field = self.wait.until(EC.element_to_be_clickable(self.comment_field))
         comment_field.clear()
         comment_field.send_keys(message)
+
+    def is_blanket_and_handkerchiefs_selected(self):
+        checkbox = self.driver.find_element(By.XPATH, "//div[@class='r-sw-container']//input[@class='switch-input']")
+        return checkbox.is_selected()
 
     def _find(self, locator):
         return self.wait.until(

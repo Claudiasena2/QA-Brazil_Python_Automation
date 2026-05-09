@@ -59,11 +59,12 @@ class TestUrbanRoutes:
         self.page.set_message_for_driver("Mensagem para o motorista")
         message_value = self.page.get_message_field_value()
         assert message_value == "Mensagem para o motorista"
-        
+
     def test_order_blanket_and_handkerchiefs(self):
-        #         # Adicionar em S8
-        print("função criada para pedir manta e lencos")
-        pass
+        self.page.click_taxi()
+        self.page.click_comfort()
+        self.page.click_blanket_and_handkerchiefs()
+        assert self.page.is_blanket_and_handkerchiefs_selected()
 
     def test_order_2_ice_creams(self):
         number_of_ice_creams = 2
