@@ -46,8 +46,6 @@ class TestUrbanRoutes:
         assert data.PHONE_NUMBER in self.page.click_number_confirm()
         time.sleep(10)
 
-
-
     def test_fill_card(self):
         self.page.click_taxi()
         self.page.click_comfort()
@@ -56,10 +54,12 @@ class TestUrbanRoutes:
         time.sleep(10)
 
     def test_comment_for_driver(self):
-        # Adicionar em S8
-        print("função criada para fazer comentario para o motorista")
-        pass
-
+        self.page.click_taxi()
+        self.page.click_comfort()
+        self.page.set_message_for_driver("Mensagem para o motorista")
+        message_value = self.page.get_message_field_value()
+        assert message_value == "Mensagem para o motorista"
+        
     def test_order_blanket_and_handkerchiefs(self):
         #         # Adicionar em S8
         print("função criada para pedir manta e lencos")

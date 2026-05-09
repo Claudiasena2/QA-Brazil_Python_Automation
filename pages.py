@@ -3,8 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 import time
-from selenium.webdriver.common.by import By
 from helpers import retrieve_phone_code
+
 
 
 class UrbanRoutesPage:
@@ -12,6 +12,7 @@ class UrbanRoutesPage:
     # Localizadores
     from_field = (By.ID,"from")
     to_field = (By.ID,"to")
+    order_button = (By.XPATH, "//button[contains(text(), 'Digitar o número e o pedido')]")
 
     # Selecionar tarifa e chamar taxi
     taxi_option_locator = (By.XPATH, '//button[contains(text(),"Chamar")]')
@@ -24,7 +25,7 @@ class UrbanRoutesPage:
     number_code = (By.ID, 'code')
     code_confirm = (By.XPATH, '//button[contains(text(),"Confirmar")]')
     number_finish = (By.CSS_SELECTOR, '.np-text')
-    # METODO DE PAGAMENTO
+    # Metodo de Pagamento
     add_metodo_pagamento = (By.CSS_SELECTOR, '.pp-button.filled')
     add_card = (By.CSS_SELECTOR, '.pp-plus')
     number_card = (By.ID, 'number')
@@ -32,12 +33,27 @@ class UrbanRoutesPage:
     add_finish_card = (By.XPATH, '//button[contains(text(),"Adicionar")]')
     close_button_card = (By.CSS_SELECTOR, '.payment-picker.open .close-button')
     confirm_card = (By.CSS_SELECTOR, '.pp-value-text')
+    # Comentário para o motorista
+    comment_field = (By.ID, "comment")
+    message_for_driver_field = (By.ID, "comment")
 
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
 
     # Metodo COR POM
+
+    def select_comfort_tariff(self):
+        comfort_icon = self.driver.find_element(*self.comfort_icon_locator)
+        comfort_icon.click()
+        
+    def get_message_field_value(self):
+        return self.driver.find_element(*self.message_for_driver_field).get_attribute("value")
+
+    def set_message_for_driver(self, message):
+        comment_field = self.wait.until(EC.element_to_be_clickable(self.comment_field))
+        comment_field.clear()
+        comment_field.send_keys(message)
 
     def _find(self, locator):
         return self.wait.until(
@@ -47,6 +63,7 @@ class UrbanRoutesPage:
         self.wait.until(
             EC.element_to_be_clickable(locator)
         ).click()
+
 
    # Endereço
 
@@ -117,4 +134,6 @@ class UrbanRoutesPage:
 
     def card_confirm(self):
        return self.driver.find_element(*self.confirm_card).text
+
+
 
