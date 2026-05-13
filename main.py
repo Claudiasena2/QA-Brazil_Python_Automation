@@ -67,11 +67,12 @@ class TestUrbanRoutes:
         assert self.page.is_blanket_and_handkerchiefs_selected()
 
     def test_order_2_ice_creams(self):
-        number_of_ice_creams = 2
-        for count in range(number_of_ice_creams):
-            # Adicionar em S8
-            print("função criada para adicionar a quantidade de sorvetes")
-        pass
+        self.page.click_taxi()
+        self.page.click_comfort()
+        routes_page = UrbanRoutesPage(self.driver)
+        routes_page.add_ice_cream(2)
+        assert (routes_page.get_ice_cream_counter()) == 2
+        time.sleep(10)
 
     def test_car_search_model_appears(self):
         # Adicionar em S8

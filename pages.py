@@ -39,6 +39,15 @@ class UrbanRoutesPage:
     # Para clicar no seletor de cobertor e lenços
     def click_blanket_and_handkerchiefs(self):
         self.driver.find_element(By.XPATH, "//div[@class='r-sw-container']//div[@class='switch']").click()
+    # Comentário para o motorista
+    comment_field = (By.ID, "comment")
+    message_for_driver_field = (By.ID, "comment")
+    # Para clicar no seletor de cobertor e lenços
+    def click_blanket_and_handkerchiefs(self):
+        self.driver.find_element(By.XPATH, "//div[@class='r-sw-container']//div[@class='switch']").click()
+    # Localizadores para sorvetes
+    ice_cream_plus_button = (By.CSS_SELECTOR, '.counter-plus')
+    ice_cream_counter = (By.CLASS_NAME, "counter-value")
 
     def __init__(self, driver):
         self.driver = driver
@@ -71,8 +80,15 @@ class UrbanRoutesPage:
             EC.element_to_be_clickable(locator)
         ).click()
 
+    def add_ice_cream(self, quantity=1):
+        for i in range(quantity):
+            self.driver.find_element(*self.ice_cream_plus_button).click()
 
-   # Endereço
+    def get_ice_cream_counter(self):
+        counter_text = self.driver.find_element(*self.ice_cream_counter).text
+        return int(counter_text)
+
+    # Endereço
 
     def _type(self, locator, text):
         element = self._find(locator)
@@ -141,6 +157,3 @@ class UrbanRoutesPage:
 
     def card_confirm(self):
        return self.driver.find_element(*self.confirm_card).text
-
-
-
