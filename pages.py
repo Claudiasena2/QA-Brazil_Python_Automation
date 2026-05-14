@@ -49,6 +49,11 @@ class UrbanRoutesPage:
     ice_cream_plus_button = (By.CSS_SELECTOR, '.counter-plus')
     ice_cream_counter = (By.CLASS_NAME, "counter-value")
 
+    # Criada para busca ou modelo de carro
+    comfort_tariff_button = (By.XPATH, "//div[contains(text(), 'Comfort')]")
+    active_car_model_title = (By.CSS_SELECTOR, '.taxis-container .tariff-picker.active')
+
+
     def __init__(self, driver):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
@@ -87,6 +92,14 @@ class UrbanRoutesPage:
     def get_ice_cream_counter(self):
         counter_text = self.driver.find_element(*self.ice_cream_counter).text
         return int(counter_text)
+
+    def select_car_comfort(self):
+        element = self.wait.until(EC.visibility_of_element_located(self.comfort_tariff_button))
+        element.click()
+
+    def get_visible_car_model_text(self):
+        element = self.wait.until(EC.visibility_of_element_located(self.active_car_model_title))
+        return element.text
 
     # Endereço
 

@@ -75,9 +75,12 @@ class TestUrbanRoutes:
         time.sleep(10)
 
     def test_car_search_model_appears(self):
-        # Adicionar em S8
-        print("função criada para busca ou modelo de carro ")
-        pass
+        expected_model = "Comfort"
+        self.page.click_taxi()
+        self.page.click_comfort()
+        routes_page = UrbanRoutesPage(self.driver)
+        actual_model = routes_page.get_visible_car_model_text()
+        assert expected_model in actual_model, f"Erro: Esperava {expected_model}, mas veio {actual_model}"
 
     @classmethod
     def teardown_class(cls):
