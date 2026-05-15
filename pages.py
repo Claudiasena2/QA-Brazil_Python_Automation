@@ -1,4 +1,5 @@
 from selenium.webdriver.common import driver_finder
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
@@ -48,11 +49,19 @@ class UrbanRoutesPage:
     # Localizadores para sorvetes
     ice_cream_plus_button = (By.CSS_SELECTOR, '.counter-plus')
     ice_cream_counter = (By.CLASS_NAME, "counter-value")
+    #Criada para busca ou modelo de carro
+    from_field = (By.ID, "from")
+    to_field = (By.ID, "to")
+    comfort_fare_button = (By.XPATH, "//div[@class='tcard'][.//div[text()='Comfort']]")
+    car_model_locator = (By.XPATH, "//div[@class='tcard-title']")
+    request_taxi_button = (By.CLASS_NAME, "smart-button-main")
+    order_header_title = (By.CLASS_NAME, "order-header-title")
+    phone_number_field = (By.ID, "phone")  # Localizador do campo de telefone
 
-    # Criada para busca ou modelo de carro
-    comfort_tariff_button = (By.XPATH, "//div[contains(text(), 'Comfort')]")
-    active_car_model_title = (By.CSS_SELECTOR, '.taxis-container .tariff-picker.active')
-
+    def click_request_taxi(self):
+        # Usar JavaScript para clicar no botão, evitando problemas de interceptação
+        taxi_button = self.driver.find_element(*self.request_taxi_button)
+        self.driver.execute_script("arguments[0].click();", taxi_button)
 
     def __init__(self, driver):
         self.driver = driver
@@ -94,18 +103,85 @@ class UrbanRoutesPage:
         return int(counter_text)
 
     def select_car_comfort(self):
-        element = self.wait.until(EC.visibility_of_element_located(self.comfort_tariff_button))
-        element.click()
+        print("=== DEBUG: Procurando botão de conforto ===")
+        cars = self.driver.find_elements(By.XPATH, "//div[@class='tcard']")
+        print(f"Cartões de carro encontrados: {len(cars)}")
+        if len(cars) == 0:
+            print("Nenhum cartão encontrado. Vamos ver o que tem na página...")
+            all_divs = self.driver.find_elements(By.TAG_NAME, "div")
+            print(f"Total de divs na página: {len(all_divs)}")
 
     def get_visible_car_model_text(self):
-        element = self.wait.until(EC.visibility_of_element_located(self.active_car_model_title))
+        element = self.wait.until(EC.visibility_of_element_located(self.car_model_locator))
         return element.text
 
-    # Endereço
+    def set_from(self, from_text):
+        element = self.wait.until(EC.element_to_be_clickable(self.from_field))
+        element.click()
+        element.send_keys(Keys.CONTROL + "a")  # Seleciona tudo
+        element.send_keys(Keys.DELETE)  # Deleta
+        time.sleep(0.5)  # Pausa importante
+        element.send_keys(from_text)
+
+    def set_to(self, to_text):
+        element = self.wait.until(EC.element_to_be_clickable(self.to_field))
+        element.click()
+        element.send_keys(Keys.CONTROL + "a")
+        element.send_keys(Keys.DELETE)
+        time.sleep(0.5)
+        element.send_keys(to_text)
+
+    def click_request_taxi(self):
+        time.sleep(2)
+        print("=== DEBUG: Investigando botões na página ===")
+    try:
+        all_buttons = self.driver.find_elements(By.TAG_NAME, "button")
+        print(f"Total de botões encontrados: {len(all_buttons)}")
+
+        for i, button in enumerate(all_buttons):
+            try:
+                text = button.text.strip()
+                classes = button.get_attribute("class")
+                is_displayed = button.is_displayed()
+                is_enabled = button.is_enabled()
+                print(
+                    f"Botão {i}: texto='{text}', classes='{classes}', visível={is_displayed}, habilitado={is_enabled}")
+            except Exception as e:
+                print(f"Botão {i}: erro ao obter informações - {e}")
+        clickable_elements = self.driver.find_elements(By.XPATH,
+                                                       "//*[contains(@class, 'button') or contains(@class, 'btn')]")
+        print(f"\nElementos com 'button' ou 'btn' na classe: {len(clickable_elements)}")
+
+        for i, element in enumerate(clickable_elements):
+            try:
+                text = element.text.strip()
+                classes = element.get_attribute("class")
+                tag = element.tag_name
+                print(f"Elemento {i}: tag='{tag}', texto='{text}', classes='{classes}'")
+            except:
+                print(f"Elemento {i}: erro ao obter informações")
+
+    except Exception as e:
+        print(f"Erro geral no debug: {e}")
+
+    # Por enquanto, não vamos tentar clicar - só investigar
+    print("=== FIM DO DEBUG ===")
+
+    def is_car_search_modal_visible(self):
+        modal_locator = (By.CSS_SELECTOR, ".order-body")
+        try:
+            self.wait.until(EC.visibility_of_element_located(modal_locator))
+            return True
+        except:
+            return False
+
+        # Endereço
 
     def _type(self, locator, text):
         element = self._find(locator)
         element.clear()
+        element.send_keys(Keys.CONTROL + "a")  # Seleciona tudo
+        element.send_keys(Keys.DELETE)
         element.send_keys(text)
 
     def _get_text(self, locator):

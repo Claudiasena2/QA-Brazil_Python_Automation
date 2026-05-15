@@ -31,27 +31,27 @@ class TestUrbanRoutes:
         self.page.enter_location(data.ADDRESS_FROM,data.ADDRESS_TO)
         assert self.page.get_from_location() == data.ADDRESS_FROM
         assert self.page.get_to_location() == data.ADDRESS_TO
-        time.sleep(10)
+
 
     def test_select_plan(self):
         self.page.click_taxi()
         self.page.click_comfort()
         assert self.page.click_comfort_active()
-        time.sleep(10)
+
 
     def test_fill_phone_number(self):
         self.page.click_taxi()
         self.page.click_comfort()
         self.page.click_number(data.PHONE_NUMBER)
         assert data.PHONE_NUMBER in self.page.click_number_confirm()
-        time.sleep(10)
+
 
     def test_fill_card(self):
         self.page.click_taxi()
         self.page.click_comfort()
         self.page.click_add_card(data.CARD_NUMBER, data.CARD_CODE)
         assert "Cartão" in self.page.card_confirm()
-        time.sleep(10)
+
 
     def test_comment_for_driver(self):
         self.page.click_taxi()
@@ -72,15 +72,22 @@ class TestUrbanRoutes:
         routes_page = UrbanRoutesPage(self.driver)
         routes_page.add_ice_cream(2)
         assert (routes_page.get_ice_cream_counter()) == 2
-        time.sleep(10)
+
 
     def test_car_search_model_appears(self):
-        expected_model = "Comfort"
-        self.page.click_taxi()
-        self.page.click_comfort()
-        routes_page = UrbanRoutesPage(self.driver)
-        actual_model = routes_page.get_visible_car_model_text()
-        assert expected_model in actual_model, f"Erro: Esperava {expected_model}, mas veio {actual_model}"
+            self.page.click_taxi()
+            self.page.click_comfort()
+            self.page.click_number(data.PHONE_NUMBER)
+            self.page.click_add_card(data.CARD_NUMBER, data.CARD_CODE)
+            self.page.set_message_for_driver(data.MESSAGE_FOR_DRIVER)
+            self.page.click_blanket_and_handkerchiefs()
+            self.page.add_ice_cream(2)
+
+            final_button = self.page.driver.find_element(By.XPATH,
+                                                         "//button[contains(@class, 'smart-button') or contains(., 'Pedir um táxi')]")
+            self.page.driver.execute_script("arguments[0].click();", final_button)
+
+            assert self.page.is_car_search_modal_visible() == True
 
     @classmethod
     def teardown_class(cls):
