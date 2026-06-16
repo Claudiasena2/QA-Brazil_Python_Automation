@@ -1,14 +1,36 @@
-Projeto: Teste da UI do Selenium WebDriver: Parte 1 (apenas Python)
-Estilo de código
-O código segue as seguintes convenções de estilo:
+markdown# 🚀 Automação de Testes Web com Python e Selenium
 
-Os nomes das variáveis são escritos em snake_case e são descritivos de sua finalidade.
-Comentários são usados para explicar blocos importantes de código.
-O código é organizado de forma modular, com blocos de código reutilizáveis importados conforme necessário.
-Siga uma convenção de nomenclatura para títulos de teste que comece com test_ e que forneça uma descrição clara do cenário de teste.
-Adicione comentários a blocos importantes de código para melhorar a compreensão e a manutenção do código.
-Use UPPER_CASE para variáveis e constantes globais.
-Extras (opcional)
-Aplique o princípio DRY (Don't Repeat Yourself, ou "Não se repita") reutilizando variáveis e funções em vários blocos.
-Nenhum log desnecessário impresso no console.
-Nenhuma função de espera desnecessária que faça o teste demorar mais do que deveria.
+Este repositório contém o desenvolvimento de scripts de automação de testes funcionais para interfaces Web. O projeto foi desenvolvido como parte prática da minha consolidação técnica na área de Garantia de Qualidade (QA), aplicando frameworks modernos de testes do ecossistema Python.
+
+## 🛠️ Tecnologias e Ferramentas Utilizadas
+* **Linguagem:** Python 3
+* **Framework de Testes:** Pytest (para estruturação, execução e asserções dos testes)
+* **Automação Web:** Selenium WebDriver (para emulação e interação com o navegador)
+
+## 🧪 Cenários de Teste Automatizados
+O projeto foca-se na validação de fluxos críticos de utilizador (E2E - End-to-End), garantindo a estabilidade e a qualidade do sistema simulado:
+1. **Validação de Campos Obrigatórios:** Testes de preenchimento e restrições de dados.
+2. **Fluxos de Sucesso e Exceção:** Verificação de comportamentos esperados e tratamento de mensagens de erro na interface gráfica (GUI).
+
+## 🏃 Como Executar os Testes Localmente
+
+### Pré-requisitos
+É necessário ter o Python instalado na máquina.
+
+1. **Clonar o repositório:**
+```bash
+git clone https://github.com
+```
+
+2. **Instalar as dependências:**
+```bash
+pip install pytest selenium
+```
+
+3. **Executar os testes com Pytest:**
+```bash
+pytest
+```
+
+---
+👋 Desenvolvido por [Cláudia Patrícia](https://linkedin.com)
