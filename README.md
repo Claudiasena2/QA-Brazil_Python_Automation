@@ -1,36 +1,36 @@
-markdown# 🚀 Automação de Testes Web com Python e Selenium
+# Automação de Testes Web com Python e Selenium WebDriver 🚀
 
-Este repositório contém o desenvolvimento de scripts de automação de testes funcionais para interfaces Web. O projeto foi desenvolvido como parte prática da minha consolidação técnica na área de Garantia de Qualidade (QA), aplicando frameworks modernos de testes do ecossistema Python.
+Este repositório contém o projeto prático de automação de testes de ponta a ponta (E2E) para uma aplicação web, aplicando as melhores práticas de engenharia de qualidade de software.
 
-## 🛠️ Tecnologias e Ferramentas Utilizadas
-* **Linguagem:** Python 3
-* **Framework de Testes:** Pytest (para estruturação, execução e asserções dos testes)
-* **Automação Web:** Selenium WebDriver (para emulação e interação com o navegador)
+## 🎯 Objetivos do Projeto
+* Automatizar os fluxos críticos de utilizador (User Stories) e validação de regras de negócio.
+* Garantir a integridade da interface gráfica (GUI), validação de campos obrigatórios e tratamento de erros.
+* Implementar testes de regressão eficientes e de rápida execução.
 
-## 🧪 Cenários de Teste Automatizados
-O projeto foca-se na validação de fluxos críticos de utilizador (E2E - End-to-End), garantindo a estabilidade e a qualidade do sistema simulado:
-1. **Validação de Campos Obrigatórios:** Testes de preenchimento e restrições de dados.
-2. **Fluxos de Sucesso e Exceção:** Verificação de comportamentos esperados e tratamento de mensagens de erro na interface gráfica (GUI).
+## 🏗️ Arquitetura e Padrões de Projeto
+O projeto foi estruturado utilizando o padrão **Page Object Model (POM)** para garantir a manutenibilidade, reutilização de código e separação clara entre a lógica dos testes e os elementos da interface:
+* `pages.py`: Mapeamento de elementos web e interações de página.
+* `data.py`: Centralização de massas de dados de teste e payloads.
+* `helpers.py`: Funções utilitárias e configurações de suporte.
+* `main.py`: Scripts de execução dos cenários de teste automatizados.
 
-## 🏃 Como Executar os Testes Localmente
+## 🛠️ Tecnologias e Frameworks
+* **Linguagem Principal:** Python 3
+* **Framework de Testes:** Pytest
+* **Ferramenta de Automação:** Selenium WebDriver
+* **Gestão de Dependências:** pip (através do arquivo `requirements.txt`)
+* **Controle de Versão:** Git / GitHub
 
-### Pré-requisitos
-É necessário ter o Python instalado na máquina.
-
-1. **Clonar o repositório:**
-```bash
-git clone https://github.com
-```
-
-2. **Instalar as dependências:**
-```bash
-pip install pytest selenium
-```
-
-3. **Executar os testes com Pytest:**
-```bash
-pytest
-```
-
----
-👋 Desenvolvido por [Cláudia Patrícia](https://linkedin.com)
+## 🚀 Como Executar o Projeto Localmente
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com
+   ```
+2. Instale as dependências necessárias:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Execute a suíte de testes com o Pytest:
+   ```bash
+   pytest main.py
+   ```
