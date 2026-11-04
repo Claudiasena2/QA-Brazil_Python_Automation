@@ -1,36 +1,82 @@
 # Automação de Testes Web com Python e Selenium WebDriver 🚀
 
-Este repositório contém o projeto prático de automação de testes de ponta a ponta (E2E) para uma aplicação web, aplicando as melhores práticas de engenharia de qualidade de software.
+## Sobre o projeto
 
-## 🎯 Objetivos do Projeto
-* Automatizar os fluxos críticos de utilizador (User Stories) e validação de regras de negócio.
-* Garantir a integridade da interface gráfica (GUI), validação de campos obrigatórios e tratamento de erros.
-* Implementar testes de regressão eficientes e de rápida execução.
+Projeto prático de automação de testes de uma aplicação Web, desenvolvido com Python, Selenium WebDriver e Pytest, como parte da formação em Quality Assurance (QA) pela TripleTen.
 
-## 🏗️ Arquitetura e Padrões de Projeto
-O projeto foi estruturado utilizando o padrão **Page Object Model (POM)** para garantir a manutenibilidade, reutilização de código e separação clara entre a lógica dos testes e os elementos da interface:
-* `pages.py`: Mapeamento de elementos web e interações de página.
-* `data.py`: Centralização de massas de dados de teste e payloads.
-* `helpers.py`: Funções utilitárias e configurações de suporte.
-* `main.py`: Scripts de execução dos cenários de teste automatizados.
+O objetivo é automatizar cenários de teste, validar funcionalidades e identificar possíveis falhas no comportamento da aplicação.
 
-## 🛠️ Tecnologias e Frameworks
-* **Linguagem Principal:** Python 3
-* **Framework de Testes:** Pytest
-* **Ferramenta de Automação:** Selenium WebDriver
-* **Gestão de Dependências:** pip (através do arquivo `requirements.txt`)
-* **Controle de Versão:** Git / GitHub
+## 🎯 Objetivos
 
-## 🚀 Como Executar o Projeto Localmente
-1. Clone o repositório:
-   ```bash
-   git clone https://github.com
-   ```
-2. Instale as dependências necessárias:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Execute a suíte de testes com o Pytest:
-   ```bash
-   pytest main.py
-   ```
+- Automatizar cenários de teste de funcionalidades Web.
+- Validar campos obrigatórios e regras de negócio.
+- Verificar o comportamento da aplicação perante diferentes condições.
+- Apoiar os testes de regressão.
+- Melhorar a organização e a reutilização do código de automação.
+
+## 🏗️ Estrutura do projeto
+
+O projeto utiliza o padrão **Page Object Model (POM)**, que permite organizar os elementos da página e separar as interações da lógica dos testes.
+
+| Ficheiro | Descrição |
+|---|---|
+| `main.py` | Scripts e cenários de teste |
+| `pages.py` | Elementos e interações das páginas Web |
+| `data.py` | Dados utilizados nos testes |
+| `helpers.py` | Funções auxiliares |
+| `requirements.txt` | Dependências do projeto |
+
+## 🛠️ Tecnologias utilizadas
+
+- Python 3
+- Pytest
+- Selenium WebDriver
+- Page Object Model (POM)
+- Git e GitHub
+- pip
+
+## 🚀 Como executar o projeto
+
+**1. Clonar o repositório**
+
+```bash
+git clone https://github.com/Claudiasena2/QA-Brazil_Python_Automation.git
+```
+
+**2. Aceder à pasta do projeto**
+
+```bash
+cd QA-Brazil_Python_Automation
+```
+
+**3. Instalar as dependências**
+
+```bash
+pip install -r requirements.txt
+```
+
+**4. Executar os testes**
+
+```bash
+pytest main.py
+```
+
+## 📚 Competências desenvolvidas
+
+- Automação de testes funcionais.
+- Utilização de Python e Selenium WebDriver.
+- Organização de código com Page Object Model.
+- Criação e execução de cenários de teste.
+- Identificação e validação de possíveis falhas.
+- Gestão de dependências e controlo de versão.
+
+## 👩‍💻 Autora
+
+**Cláudia Sena**
+
+QA Analyst | Quality Assurance
+
+- [LinkedIn](https://www.linkedin.com/in/claudiasena-qa)
+- [GitHub](https://github.com/Claudiasena2)
+
+Projeto desenvolvido no âmbito da formação em Quality Assurance (QA) pela TripleTen.
