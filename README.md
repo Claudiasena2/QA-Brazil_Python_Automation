@@ -2,7 +2,7 @@
 
 ## Sobre o projeto
 
-Projeto prático de automação de testes de uma aplicação Web, desenvolvido com Python, Selenium WebDriver e Pytest, como parte da formação em Quality Assurance (QA) pela TripleTen.
+Projeto prático de automação de testes Web, desenvolvido com Python, Selenium WebDriver e Pytest, no âmbito da formação em Quality Assurance (QA) pela TripleTen.
 
 O objetivo é automatizar cenários de teste, validar funcionalidades e identificar possíveis falhas no comportamento da aplicação.
 
@@ -16,7 +16,7 @@ O objetivo é automatizar cenários de teste, validar funcionalidades e identifi
 
 ## 🏗️ Estrutura do projeto
 
-O projeto utiliza o padrão **Page Object Model (POM)**, que permite organizar os elementos da página e separar as interações da lógica dos testes.
+O projeto utiliza o padrão **Page Object Model (POM)**, que permite organizar os elementos das páginas e separar as interações com a interface da lógica dos testes.
 
 | Ficheiro | Descrição |
 |---|---|
@@ -74,7 +74,7 @@ pytest main.py
 
 **Cláudia Sena**
 
-QA Analyst | Quality Assurance
+Analista de Controlo de Qualidade | Quality Assurance
 
 - [LinkedIn](https://www.linkedin.com/in/claudiasena-qa)
 - [GitHub](https://github.com/Claudiasena2)
